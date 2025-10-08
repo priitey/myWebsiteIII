@@ -54,6 +54,8 @@
 :root {
   --fg: rgb(12, 12, 12);
   --bg: rgb(199, 199, 199);
+  --hl: rgba(12, 12, 12, 0.12);
+  --alt: rgb(244, 154, 98);
   --hdr: 1.8rem;
   --body: 0.93rem;
 }
@@ -79,13 +81,38 @@ body {
   font-family: "Times Newer Roman", normal, serif;
 }
 
+a {
+  text-decoration: none;
+  color: var(--fg);
+}
+
+.button {
+  border: 1px solid var(--fg);
+  background: var(--bg);
+  cursor: pointer;
+}
+.button:hover {
+  background: var(--hl);
+}
+.button:active {
+  background: var(--hl);
+  border: 1px solid var(--bg);
+}
+*:focus {
+  /* outline: 1px dashed var(--alt);
+  outline-offset: 0.4rem; */
+  outline: none;
+  border: 1px none var(--alt);
+  box-shadow: 0 0 0.8em var(--alt);
+}
+
 header {
   height: 15%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.0rem;
+  gap: 0rem;
   padding: 0.3rem;
   margin: 0;
   line-height: 1.5rem;
@@ -97,9 +124,31 @@ header {
     padding: 0.67rem;
     margin: 0;
     line-height: 1.5rem;
+    span#contact {
+      button#friends,
+      button#friends:hover,
+      button#friends:active {
+        border: none;
+        background: transparent;
+        outline: none;
+        text-align: left;
+        margin: 0;
+        padding: 0;
+        font-family: "Times Newer Roman", serif;
+        font-size: var(--bg);
+        cursor: pointer;
+      }
+    }
   }
-  div#hide-wrapper{
+  div#hide-wrapper {
     flex-shrink: 0;
+    button#hide.button {
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 3px;
+    }
   }
 }
 
