@@ -135,4 +135,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
             }
         });
     });
+
+    // Show specialty tags by default on page load
+    const specDiv = document.getElementById('specialty-tags');
+    if (specDiv) {
+        specDiv.classList.remove('hidden');
+    }
 });
