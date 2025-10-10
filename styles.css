@@ -138,13 +138,25 @@ main {
         gap: 0.5rem;
       }
       span#titles-copy {
-        padding: 0.5rem;
+        padding: 1.5rem 0.5rem 0 0;
         width: 250px;
         font-size: 1.2rem;
         word-wrap: break-word;
       }
     }
-
+    div#ctls-wrapper {
+        section#titles {
+          margin: 0;
+          padding: 0;
+        }
+        section#tag-wrapper {
+          margin: 0;
+          padding: 0;
+          div.tag-container {
+            padding: 1.5rem 0 0 0;
+          }
+        }
+      }
   }
   section#prj-canvas {
     display: flex;
@@ -152,7 +164,8 @@ main {
     padding: 1rem;
     border-radius: 0.2rem;
     box-shadow: inherit;
-    background-image: url(placeholder.png);
+    /* background-image: url(placeholder.png); */
+    filter: grayscale(100%);
     min-width: 80%;
   }
 }
