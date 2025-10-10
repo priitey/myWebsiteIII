@@ -10,7 +10,6 @@
   font-style: italic;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Times Newer Roman";
   src: local("Times Newer Roman Bold"), local("TimesNewerRoman-Bold"),
@@ -23,7 +22,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Times Newer Roman";
   src: local("Times Newer Roman Bold Italic"),
@@ -37,7 +35,6 @@
   font-style: italic;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Times Newer Roman";
   src: local("Times Newer Roman Regular"), local("TimesNewerRoman-Regular"),
@@ -56,6 +53,7 @@
   --bg: rgb(199, 199, 199);
   --hl: rgba(12, 12, 12, 0.12);
   --alt: rgb(244, 154, 98);
+  --alt2: rgb(254, 254, 254);
   --hdr: 1.8rem;
   --body: 0.93rem;
 }
@@ -87,103 +85,78 @@ a {
 }
 
 .button {
-  border: 1px solid var(--fg);
+  border: 1px none var(--fg);
+  outline: none;
   background: var(--bg);
   cursor: pointer;
+  font-family: "Times Newer Roman", normal, serif;
+  box-shadow: 0.2rem 0.2rem 0.25rem var(--hl);
+  border-radius: 0.2rem;
 }
 .button:hover {
   background: var(--hl);
 }
 .button:active {
   background: var(--hl);
-  border: 1px solid var(--bg);
+  border: 1px none var(--bg);
 }
 *:focus {
-  /* outline: 1px dashed var(--alt);
-  outline-offset: 0.4rem; */
   outline: none;
-  border: 1px none var(--alt);
-  box-shadow: 0 0 0.8em var(--alt);
-}
-
-header {
-  height: 15%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0rem;
-  padding: 0.3rem;
-  margin: 0;
-  line-height: 1.5rem;
-  div#hdr-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    gap: 1.9rem;
-    padding: 0.67rem;
-    margin: 0;
-    line-height: 1.5rem;
-    span#contact {
-      button#friends,
-      button#friends:hover,
-      button#friends:active {
-        border: none;
-        background: transparent;
-        outline: none;
-        text-align: left;
-        margin: 0;
-        padding: 0;
-        font-family: "Times Newer Roman", serif;
-        font-size: var(--bg);
-        cursor: pointer;
-      }
-    }
-  }
-  div#hide-wrapper {
-    flex-shrink: 0;
-    button#hide.button {
-      display: flex;
-      align-content: center;
-      justify-content: center;
-      align-items: center;
-      padding-bottom: 3px;
-    }
-  }
+  border: 1px none var(--alt2);
+  box-shadow: 0 0 0.8em var(--alt2);
 }
 
 main {
-  height: 70%;
   width: 100%;
-  display: block;
-  padding: 0.67rem;
+  height: 100%;
   margin: 0;
-  border-top: 1px solid var(--fg);
-  border-bottom: 1px solid var(--fg);
-}
-
-footer {
-  height: 15%;
-  width: 100%;
+  padding: 1rem;
+  border-radius: 0.2rem;
   display: flex;
   flex-direction: row;
-  gap: 1rem;
-  padding: 0.67rem;
-  margin: 0;
-  section#sidebar {
-    background: rgba(255, 255, 255, 0);
-    flex-shrink: 0;
-    ul {
-      margin: 0;
-      padding: 0;
-      li,
-      li li {
-        list-style: none;
+  align-content: center;
+  justify-content: space-between;
+  box-shadow: 0.2rem 0.2rem 0.5rem var(--hl);
+  menu#menu-desktop.desktop {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin: 0;
+    padding: 1rem;
+    border-radius: 0.2rem;
+    box-shadow: inherit;
+    div#info-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      section#titles {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+      span#titles-copy {
+        padding: 0.5rem;
+        width: 250px;
+        font-size: 1.2rem;
+        word-wrap: break-word;
       }
     }
+
   }
-  section#controls {
-    background: rgba(12, 12, 12, 0.3);
-    flex: 1;
+  section#prj-canvas {
+    display: flex;
+    margin: 0;
+    padding: 1rem;
+    border-radius: 0.2rem;
+    box-shadow: inherit;
+    background-image: url(placeholder.png);
+    min-width: 80%;
   }
+}
+
+.hidden {
+  display: none !important;
 }

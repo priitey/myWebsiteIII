@@ -7,49 +7,55 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header>
-      <div id="hdr-wrapper">
-        <span id="ack"
-          >I acknowledge the people of the Woi wurrung and Boon wurrung language
-          groups of the eastern Kulin Nation on whose unceded lands I work and
-          live. I recognise that sovereignty was never ceded and that this
-          Country belongs to First Nation peoples. [-o-]
-        </span>
-        <span id="about"
-          >Hello! I'm Peter; welcome to my communication design and creative
-          coding professional practice. I feel most at home as the bricoleur;
-          cobbling together technologies to create novel and insightful
-          tools/systems. I live in Naarm/Melbourne, Australia but I work
-          remotely for people near and far. Please reach out with your ideas–
-          let's collaborate!
-        </span>
-        <span id="contact"><a href="mailto:hello@prw.studio">Email</a> <a href="https://www.instagram.com/3_d_12/">Instagram</a> <button id="friends">Friends</button></span>
-        <span id="explain"
-          >This website has been designed to cut to the chase. Use the toggle
-          boxes at the bottom of the page to adjust which projects are brought
-          into focus. Click on a project to see more information and detailed
-          documentation. If you would like a pdf version of my portfolio that is
-          customised to the toggle settings, press the button down below.
-        </span>
-      </div>
-      <div id="hide-wrapper">
-        <button type="button" id="hide" class="button">↕</button>
-      </div>
-    </header>
-    <main></main>
-    <footer>
-      <section id="sidebar">
-        <ul>
-          <li>Choose mode</li>
-          <li>Random</li>
-          <li>Clear</li>
-          <li>Get my portfolio</li>
-        </ul>
+
+    <main role="main">
+
+      <menu id="menu-desktop" class="desktop">
+        <div id="info-wrapper" class="">
+
+            <section id="titles">
+                <span id="ack" class=""><button id="ack-button" class="button" type="button" data-text="I acknowledge the people of the Woi wurrung and Boon wurrung language groups of the eastern Kulin Nation on whose unceded lands I work and live. I recognise that sovereignty was never ceded and that this Country belongs to First Nation peoples." data-glitch="1">Acknowledgement</button> </span>
+                <span id="about"><button id="about-button" class="button" type="button" data-text="Hello! I'm Peter; this is my communication design and creative coding studio practice. I feel most at home as the bricoleur; cobbling together multimedia technologies to create novel tools/systems. I live in Naarm/Melbourne, Australia but I work remotely for people near and far. Please reach out with your ideas; let's collaborate!" data-glitch="2">Who?</button> </span>
+                <span id="explain" class=""><button id="explain-button" class="button" type="button" data-text="This website has been designed to cut to the chase. Use the toggle boxes at the bottom of the page to adjust which projects are brought into focus. Click on a project to see more information and detailed documentation. If you would like a pdf version of my portfolio that is customised to the toggle settings, press the button down below." data-glitch="3">What?</button> </span>
+            </section>
+
+            <span id="titles-copy"><!-- Animated copy goes here injected by JS-->
+            </span>
+            <span id="contact" class="hidden">
+                <a href="mailto:hello@prw.studio">Email</a>
+                <a href="https://www.instagram.com/3_d_12/">Instagram</a>
+                <button id="friends">Friends</button></span>
+            </section>
+
+        </div>
+
+        <div id="ctls-wrapper">
+
+            <section id="titles">
+                <span id="specialities" class=""><button id="specialities-button" class="button" type="button" data-tag="spec">SPECIALITIES</button> </span>
+                <span id="tools"><button id="tools-button" class="button" type="button" data-tag="tool">TOOLS</button> </span>
+                <span id="aesthetics"><button id="aesthetics-button" class="button" type="button" data-tag="aest">AESTHETICS</button> </span>
+            </section>
+
+            <div id="tag-wrapper">
+                <div id="specialty-tags" class="hidden" data-tag="spec">Speciality tags loading...</div>
+                <div id="tool-tags" class="hidden" data-tag="tool">Tool tags loading...</div>
+                <div id="aesthetic-tags" class="hidden" data-tag="aest">Aesthetic tags loading...</div>
+            </div>
+
+        </div>
+
+      </menu>
+
+      <menu id="menu-mobile" class="mobile hidden"></menu>
+
+      <section id="prj-canvas">
       </section>
-      <section id="controls">
-        <input type="checkbox" id="attribute" name="attribute" />
-        <label for="attribute">Attribute</label>
-      </section>
-    </footer>
+
+    </main>
+
+    <script type="text/javascript" src="cms.js"></script>
+    <script type="text/javascript" src="copyAnim.js"></script>
+
   </body>
 </html>
