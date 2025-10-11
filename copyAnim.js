@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         let current = [];
         let resolvedIndices = new Set();
 
-        let randChars1 = '▒▓░';
+        let randChars1 = ':)'
         let randChars2 = '[-o-]';
         let randChars3 = '10';
         
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         }
 
         el.textContent = '';
-        glitchInterval = setInterval(updateGlitch, 50);
+        glitchInterval = setInterval(updateGlitch, 67);
         fillGlitch();
     }
 
@@ -135,7 +135,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
             }
         });
     });
-
     // Show specialty tags by default on page load
     const specDiv = document.getElementById('specialty-tags');
     if (specDiv) {
