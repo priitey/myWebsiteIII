@@ -101,12 +101,7 @@ a {
   border: 1px none var(--fg);
   outline: none;
   animation: btnFg 0.2s ease-in-out;
-  background: radial-gradient(
-    closest-side,
-    var(--alt2) 0%,
-    var(--hl) 0%,
-    var(--bg) 0%
-  );
+  background: var(--bg);
   cursor: pointer;
   font-family: "Times Newer Roman", normal, serif;
   /* font-family: "Atkinson Hyperlegible Next", normal, serif; */
@@ -121,9 +116,8 @@ a {
   /* background: var(--alt); */
   background: radial-gradient(
     closest-side,
-    var(--alt2) 22%,
-    var(--hl) 30%,
-    var(--fg) 180%
+    var(--alt2),
+    var(--bg)
   );
 }
 :focus {

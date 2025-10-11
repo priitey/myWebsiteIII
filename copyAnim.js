@@ -10,11 +10,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
         btn.addEventListener("mousedown", () => {
             const textToInsert = btn.getAttribute('data-text');
             const glitchType = btn.getAttribute('data-glitch');
-            insertTxt(ttlCopy, textToInsert, glitchType);
+            const orderType = btn.getAttribute('data-order');
+            insertTxt(ttlCopy, textToInsert, glitchType, orderType);
         });
     });
 
-    function insertTxt(el, strEl, glitchType) {
+    function insertTxt(el, strEl, glitchType, orderType) {
         if (timeout) {
             clearTimeout(timeout);
             timeout = null;
@@ -27,18 +28,28 @@ document.addEventListener("DOMContentLoaded", (e) => {
         let target = strEl.split("");
         let current = new Array(target.length).fill('\u00A0');
         let intlArr = [...Array(current.length).keys()];
-        let midI = findMiddleElements(intlArr);
-        let newOrder = intlArr.sort((a, b) => {
-            let distA = Math.abs(a - midI);
-            let distB = Math.abs(b - midI);
-            return distA - distB
-        })
-        // console.log(newOrder);
         let revealIndex = 0;
         let revealedIndices = new Set();
         let resolvedIndices = new Set();
+        let textWidth = 250;
+        let midI = findMiddleElements(intlArr);
 
-        let randChars1 = ':)'
+        // Calculate order based on orderType
+        let revealOrder;
+        if (orderType === 'spiral') {
+            revealOrder = calculateSpiralOrder(intlArr, midI, textWidth, el);
+        } else if (orderType === 'center') {
+            revealOrder = calculateCenterOrder(intlArr, midI);
+        } else if (orderType === 'spots') {
+            revealOrder = calculateRandomOrder(intlArr);
+        } else if (orderType === 'sequential') {
+            revealOrder = calculateSequentialOrder(intlArr);
+        } else {
+            // Default to center
+            revealOrder = calculateCenterOrder(intlArr, midI);
+        }
+
+        let randChars1 = ':)';
         let randChars2 = '[-o-]';
         let randChars3 = '10';
 
@@ -69,19 +80,17 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
         // Phase 1: Fill with random glitching characters
         const fillGlitch = () => {
-
             if (revealIndex >= target.length) {
                 timeout = setTimeout(() => {
                     resolve();
-                }, 1);
+                }, 10);
                 return;
             }
 
             let indexR = Math.floor(Math.random() * charArr.length);
             let charR = charArr[indexR];
-            // current.push(charR);
-            current[newOrder[revealIndex]] = charR;
-            revealedIndices.add(newOrder[revealIndex]);
+            current[revealOrder[revealIndex]] = charR;
+            revealedIndices.add(revealOrder[revealIndex]);
             revealIndex++;
             el.textContent = current.join('');
 
@@ -122,8 +131,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
         fillGlitch();
     }
 
-
-
     const tagBtns = document.querySelectorAll('#specialities-button, #tools-button, #aesthetics-button');
     tagBtns.forEach(btn => {
         btn.addEventListener("mousedown", () => {
@@ -148,6 +155,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
             }
         });
     });
+    
     // Show specialty tags by default on page load
     const specDiv = document.getElementById('specialty-tags');
     if (specDiv) {
@@ -156,11 +164,61 @@ document.addEventListener("DOMContentLoaded", (e) => {
 });
 
 function findMiddleElements(arr) {
-    let firstI = 0;
-    let lastI = arr.length;
+    return Math.floor(arr.length / 2);
+}
 
-    let midI = Math.floor((firstI + lastI) / 2);
-    let result = midI;
+function getCoords(index, width, el) {
+    if (!getCoords.cachedCharWidth) {
+        const style = window.getComputedStyle(el);
+        const fontSize = parseFloat(style.fontSize);
+        getCoords.cachedCharWidth = fontSize * 0.48;
+    }
+    
+    const charsPerLn = Math.floor(width / getCoords.cachedCharWidth);
+    let x = index % charsPerLn;
+    let y = Math.floor(index / charsPerLn);
 
-    return result;
+    return { x, y };
+}
+
+function calculateSpiralOrder(intlArr, midI, textWidth, el) {
+    let sprMidI = getCoords(midI, textWidth, el);
+    let sprCtrX = sprMidI.x;
+    let sprCtrY = sprMidI.y;
+    
+    return [...intlArr].sort((a, b) => {
+        let aPos = getCoords(a, textWidth, el);
+        let bPos = getCoords(b, textWidth, el);
+
+        let angleA = Math.atan2(aPos.y - sprCtrY, aPos.x - sprCtrX);
+        let angleB = Math.atan2(bPos.y - sprCtrY, bPos.x - sprCtrX);
+        
+        if (angleA < 0) angleA += 2 * Math.PI;
+        if (angleB < 0) angleB += 2 * Math.PI;
+        
+        let radiusA = Math.hypot(aPos.x - sprCtrX, aPos.y - sprCtrY);
+        let radiusB = Math.hypot(bPos.x - sprCtrX, bPos.y - sprCtrY);
+        
+        let sprFactor = -0.7;
+        let spiralA = angleA + (radiusA * sprFactor);
+        let spiralB = angleB + (radiusB * sprFactor);
+
+        return spiralA - spiralB;
+    });
+}
+
+function calculateCenterOrder(intlArr, midI) {
+    return [...intlArr].sort((a, b) => {
+        let distA = Math.abs(a - midI);
+        let distB = Math.abs(b - midI);
+        return distA - distB;
+    });
+}
+
+function calculateRandomOrder(intlArr) {
+    return [...intlArr].sort(() => Math.random() - 0.5);
+}
+
+function calculateSequentialOrder(intlArr) {
+    return [...intlArr.reverse()];
 }
