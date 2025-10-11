@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", (e) => {
-    console.log("DOM fully loaded and parsed");
 
     const titleBtns = document.querySelectorAll('#ack-button, #about-button, #explain-button');
     const ttlCopy = document.getElementById('titles-copy');
@@ -26,13 +25,23 @@ document.addEventListener("DOMContentLoaded", (e) => {
         }
 
         let target = strEl.split("");
-        let current = [];
+        let current = new Array(target.length).fill('\u00A0');
+        let intlArr = [...Array(current.length).keys()];
+        let midI = findMiddleElements(intlArr);
+        let newOrder = intlArr.sort((a, b) => {
+            let distA = Math.abs(a - midI);
+            let distB = Math.abs(b - midI);
+            return distA - distB
+        })
+        // console.log(newOrder);
+        let revealIndex = 0;
+        let revealedIndices = new Set();
         let resolvedIndices = new Set();
 
         let randChars1 = ':)'
         let randChars2 = '[-o-]';
         let randChars3 = '10';
-        
+
         // Select which character set to use based on glitchType
         let randChars = '';
         if (glitchType === '1') {
@@ -44,13 +53,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
         } else {
             randChars = randChars1; // default
         }
-        
+
         const charArr = randChars.split("");
 
         // Continuously update unresolved characters with random glitches
         const updateGlitch = () => {
             for (let i = 0; i < current.length; i++) {
-                if (!resolvedIndices.has(i)) {
+                if (!resolvedIndices.has(i) && revealedIndices.has(i)) {
                     let indexR = Math.floor(Math.random() * charArr.length);
                     current[i] = charArr[indexR];
                 }
@@ -60,7 +69,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
         // Phase 1: Fill with random glitching characters
         const fillGlitch = () => {
-            if (current.length >= target.length) {
+
+            if (revealIndex >= target.length) {
                 timeout = setTimeout(() => {
                     resolve();
                 }, 1);
@@ -69,7 +79,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
             let indexR = Math.floor(Math.random() * charArr.length);
             let charR = charArr[indexR];
-            current.push(charR);
+            // current.push(charR);
+            current[newOrder[revealIndex]] = charR;
+            revealedIndices.add(newOrder[revealIndex]);
+            revealIndex++;
             el.textContent = current.join('');
 
             timeout = setTimeout(() => {
@@ -94,7 +107,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
             }
 
             let randomIndex = unresolvedIndices[Math.floor(Math.random() * unresolvedIndices.length)];
-            
+
             current[randomIndex] = target[randomIndex];
             resolvedIndices.add(randomIndex);
             el.textContent = current.join('');
@@ -111,11 +124,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
 
 
-    const tagBtns = document.querySelectorAll('#specialities-button, #tools-button, #aesthetics-button');    
+    const tagBtns = document.querySelectorAll('#specialities-button, #tools-button, #aesthetics-button');
     tagBtns.forEach(btn => {
         btn.addEventListener("mousedown", () => {
             const btnType = btn.getAttribute('data-tag');
-            
+
             const specDiv = document.getElementById('specialty-tags');
             const toolDiv = document.getElementById('tool-tags');
             const aestDiv = document.getElementById('aesthetic-tags');
@@ -141,3 +154,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
         specDiv.classList.remove('hidden');
     }
 });
+
+function findMiddleElements(arr) {
+    let firstI = 0;
+    let lastI = arr.length;
+
+    let midI = Math.floor((firstI + lastI) / 2);
+    let result = midI;
+
+    return result;
+}
