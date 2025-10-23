@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     })
     .then(data => {
       const projects = data.docs;
+      let count = 0;
       // console.log(projects);
       for (let project of projects) {
         let title, blurb;
@@ -42,7 +43,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
           });
         }
         // console.log(aesthetics);
-        
+
+        // CREATE AND INSERT HTML ELEMENTS HERE
+        const projectsList = document.getElementById('projects');
+        addPrjIndexEl(projectsList, count, title, specialities, tools, aesthetics);
+        count++;
       }
     })
     .catch(error => {
@@ -57,4 +62,35 @@ function extractTextFromRichText(richText) {
   ).join('\n');
   // Below is the "hard-coded" way to extract blurb text
   // console.log(projects[2].blurb.root.children[0].children[0].text);
+}
+
+function addPrjIndexEl(parentEl, index, title, specialities, tools, aesthetics) {
+  const newLi = document.createElement("li");
+  newLi.classList.add("prj-deets");
+  const newLiID = "prj" + (index + 1).toString();
+  newLi.setAttribute("id", newLiID);
+
+  for (let i = 0; i < 4; i++) {
+    let span;
+    if (i === 0) {
+      span = document.createElement("span");
+      span.className = "prj-title";
+      span.textContent = title;
+    } else if (i === 1) {
+      span = document.createElement("span");
+      span.className = "prj-specs";
+      span.textContent = specialities.join(", ");
+    } else if (i === 2) {
+      span = document.createElement("span");
+      span.className = "prj-tools";
+      span.textContent = tools.join(", ");
+    } else if (i === 3) {
+      span = document.createElement("span");
+      span.className = "prj-aesths";
+      span.textContent = aesthetics.join(", ");
+    }
+    newLi.appendChild(span);
+  }
+
+  parentEl.appendChild(newLi);
 }

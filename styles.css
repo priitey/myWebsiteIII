@@ -198,6 +198,10 @@ main {
         flex-direction: row;
         gap: 1rem;
         margin: 2.5rem 0 2.5rem 0;
+        span {
+          max-width: 100px;
+          overflow: hidden;
+        }
       }
     }
   }
