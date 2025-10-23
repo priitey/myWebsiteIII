@@ -51,10 +51,12 @@
 @font-face {
   font-family: "Atkinson Hyperlegible Next";
   src: local("Atkinson Hyperlegible Next Regular"),
-       local("AtkinsonHyperlegibleNext-Regular"),
-       url("fonts/atkinson/AtkinsonHyperlegibleNext-Regular.woff2") format("woff2"),
-       url("fonts/atkinson/AtkinsonHyperlegibleNext-Regular.ttf") format("truetype"),
-       url("fonts/atkinson/AtkinsonHyperlegibleNext-Regular.otf") format("opentype");
+    local("AtkinsonHyperlegibleNext-Regular"),
+    url("fonts/atkinson/AtkinsonHyperlegibleNext-Regular.woff2") format("woff2"),
+    url("fonts/atkinson/AtkinsonHyperlegibleNext-Regular.ttf")
+      format("truetype"),
+    url("fonts/atkinson/AtkinsonHyperlegibleNext-Regular.otf")
+      format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -114,11 +116,7 @@ a {
 }
 .button:active {
   /* background: var(--alt); */
-  background: radial-gradient(
-    closest-side,
-    var(--alt2),
-    var(--bg)
-  );
+  background: radial-gradient(closest-side, var(--alt2), var(--bg));
 }
 :focus {
   outline: none;
@@ -186,10 +184,22 @@ main {
     margin: 0;
     padding: 1rem;
     border-radius: 0.2rem;
-    box-shadow: inherit;
+    /* box-shadow: inherit; */
     /* background-image: url(placeholder.png); */
     filter: grayscale(100%);
     min-width: 80%;
+    ol#projects {
+      margin: 55px 0 0 0;
+      width: max-content;
+      font-size: var(--body);
+      li {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        margin: 2.5rem 0 2.5rem 0;
+      }
+    }
   }
 }
 

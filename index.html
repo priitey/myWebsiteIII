@@ -7,54 +7,173 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-
     <main role="main">
-
       <menu id="menu-desktop" class="desktop">
         <div id="info-wrapper" class="">
+          <section id="titles">
+            <span id="ack" class=""
+              ><button
+                id="ack-button"
+                class="button"
+                type="button"
+                data-text="I acknowledge the people of the Woi wurrung and Boon wurrung language groups of the eastern Kulin Nation on whose unceded lands I work and live. I recognise that sovereignty was never ceded and that this Country belongs to First Nation peoples."
+                data-glitch="1"
+                data-order="sequential"
+              >
+                Acknowledgement
+              </button>
+            </span>
+            <span id="about"
+              ><button
+                id="about-button"
+                class="button"
+                type="button"
+                data-text="Hello! I'm Peter; this is my communication design and creative coding studio practice. I feel most at home as the bricoleur; cobbling together multimedia technologies to create novel tools/systems. I live in Naarm/Melbourne, Australia but I work remotely for people near and far. Please reach out with your ideas; let's collaborate!"
+                data-glitch="2"
+                data-order="spots"
+              >
+                Who?
+              </button>
+            </span>
+            <span id="explain" class=""
+              ><button
+                id="explain-button"
+                class="button"
+                type="button"
+                data-text="This website has been designed to cut to the chase. Use the toggle boxes at the bottom of the page to adjust which projects are brought into focus. Click on a project to see more information and detailed documentation. If you would like a pdf version of my portfolio that is customised to the toggle settings, press the button down below."
+                data-glitch="3"
+                data-order="spiral"
+              >
+                What?
+              </button>
+            </span>
+          </section>
 
-            <section id="titles">
-                <span id="ack" class=""><button id="ack-button" class="button" type="button" data-text="I acknowledge the people of the Woi wurrung and Boon wurrung language groups of the eastern Kulin Nation on whose unceded lands I work and live. I recognise that sovereignty was never ceded and that this Country belongs to First Nation peoples." data-glitch="1" data-order="sequential">Acknowledgement</button> </span>
-                <span id="about"><button id="about-button" class="button" type="button" data-text="Hello! I'm Peter; this is my communication design and creative coding studio practice. I feel most at home as the bricoleur; cobbling together multimedia technologies to create novel tools/systems. I live in Naarm/Melbourne, Australia but I work remotely for people near and far. Please reach out with your ideas; let's collaborate!" data-glitch="2" data-order="spots">Who?</button> </span>
-                <span id="explain" class=""><button id="explain-button" class="button" type="button" data-text="This website has been designed to cut to the chase. Use the toggle boxes at the bottom of the page to adjust which projects are brought into focus. Click on a project to see more information and detailed documentation. If you would like a pdf version of my portfolio that is customised to the toggle settings, press the button down below." data-glitch="3" data-order="spiral">What?</button> </span>
-            </section>
-
-            <span id="titles-copy"><!-- Animated copy goes here injected by JS--></span>
-            <span id="contact" class="hidden">
+          <span id="titles-copy"
+            ><!-- Animated copy goes here injected by JS--></span
+          >
+          <!-- <span id="contact" class="hidden">
                 <a href="mailto:hello@prw.studio">Email</a>
                 <a href="https://www.instagram.com/3_d_12/">Instagram</a>
                 <button id="friends">Friends</button></span>
-            </section>
-
+            </section> -->
         </div>
 
         <div id="ctls-wrapper">
+          <section id="titles">
+            <span id="specialities" class=""
+              ><button
+                id="specialities-button"
+                class="button"
+                type="button"
+                data-tag="spec"
+              >
+                Specialties
+              </button>
+            </span>
+            <span id="tools"
+              ><button
+                id="tools-button"
+                class="button"
+                type="button"
+                data-tag="tool"
+              >
+                Tools
+              </button>
+            </span>
+            <span id="aesthetics"
+              ><button
+                id="aesthetics-button"
+                class="button"
+                type="button"
+                data-tag="aest"
+              >
+                Aesthetics
+              </button>
+            </span>
+          </section>
 
-            <section id="titles">
-                <span id="specialities" class=""><button id="specialities-button" class="button" type="button" data-tag="spec">Specialties</button> </span>
-                <span id="tools"><button id="tools-button" class="button" type="button" data-tag="tool">Tools</button> </span>
-                <span id="aesthetics"><button id="aesthetics-button" class="button" type="button" data-tag="aest">Aesthetics</button> </span>
-            </section>
-
-            <section id="tag-wrapper">
-                <div id="specialty-tags" class="tag-container hidden" data-tag="spec">Speciality tags loading...</div>
-                <div id="tool-tags" class="tag-container hidden" data-tag="tool">Tool tags loading...</div>
-                <div id="aesthetic-tags" class="tag-container hidden" data-tag="aest">Aesthetic tags loading...</div>
-            </section>
-
+          <section id="tag-wrapper">
+            <div
+              id="specialty-tags"
+              class="tag-container hidden"
+              data-tag="spec"
+            >
+              Speciality tags loading...
+            </div>
+            <div id="tool-tags" class="tag-container hidden" data-tag="tool">
+              Tool tags loading...
+            </div>
+            <div
+              id="aesthetic-tags"
+              class="tag-container hidden"
+              data-tag="aest"
+            >
+              Aesthetic tags loading...
+            </div>
+          </section>
         </div>
-
       </menu>
 
       <menu id="menu-mobile" class="mobile hidden"></menu>
 
       <section id="prj-canvas">
+        <ol id="projects">
+          <li id="p01">
+            <span class="project-deets">project_title</span>
+            <span class="project-deets">specialities</span>
+            <span class="project-deets">tools</span>
+            <span class="project-deets">aesthetics</span>
+          </li>
+          <li id="p02">
+            <span class="project-deets">project_title</span>
+            <span class="project-deets">specialities</span>
+            <span class="project-deets">tools</span>
+            <span class="project-deets">aesthetics</span>
+          </li>
+          <li id="p03">
+            <span class="project-deets">project_title</span>
+            <span class="project-deets">specialities</span>
+            <span class="project-deets">tools</span>
+            <span class="project-deets">aesthetics</span>
+          </li>
+          <li id="p04">
+            <span class="project-deets">project_title</span>
+            <span class="project-deets">specialities</span>
+            <span class="project-deets">tools</span>
+            <span class="project-deets">aesthetics</span>
+          </li>
+          <li id="p05">
+            <span class="project-deets">project_title</span>
+            <span class="project-deets">specialities</span>
+            <span class="project-deets">tools</span>
+            <span class="project-deets">aesthetics</span>
+          </li>
+          <li id="p06">
+            <span class="project-deets">project_title</span>
+            <span class="project-deets">specialities</span>
+            <span class="project-deets">tools</span>
+            <span class="project-deets">aesthetics</span>
+          </li>
+          <li id="p07">
+            <span class="project-deets">project_title</span>
+            <span class="project-deets">specialities</span>
+            <span class="project-deets">tools</span>
+            <span class="project-deets">aesthetics</span>
+          </li>
+          <li id="p08">
+            <span class="project-deets">project_title</span>
+            <span class="project-deets">specialities</span>
+            <span class="project-deets">tools</span>
+            <span class="project-deets">aesthetics</span>
+          </li>
+        </ol>
       </section>
-
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script type="text/javascript" src="cms.js"></script>
     <script type="text/javascript" src="copyAnim.js"></script>
-
+    <script type="text/javascript" src="gsap.js"></script>
   </body>
 </html>
