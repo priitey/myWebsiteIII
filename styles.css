@@ -75,6 +75,18 @@
 * {
   box-sizing: border-box;
 }
+*::selection {
+  background-color: var(--alt);
+  color: var(--alt2);
+}
+*::-moz-selection {
+  background-color: var(--alt);
+  color: var(--alt2);
+}
+*::-webkit-selection {
+  background-color: var(--alt);
+  color: var(--alt2);
+}
 
 html {
   font-size: 16px;
@@ -184,24 +196,33 @@ main {
     margin: 0;
     padding: 1rem;
     border-radius: 0.2rem;
+    font-family: "Arial", thin, sans-serif;
     /* box-shadow: inherit; */
     /* background-image: url(placeholder.png); */
-    filter: grayscale(100%);
+    /* filter: grayscale(100%); */
     min-width: 80%;
     ol#projects {
-      margin: 55px 0 0 0;
+      margin: 0 0 0 0;
       width: max-content;
       font-size: var(--body);
       li {
         list-style: none;
         display: flex;
         flex-direction: row;
-        gap: 1rem;
-        margin: 2.5rem 0 2.5rem 0;
+        justify-content: space-between;
+        gap: 6rem;
+        margin: 0 0 4rem 0;
+        padding: 0 0 0.3rem 0;
         span {
-          max-width: 100px;
+          width: 200px;
           overflow: hidden;
         }
+        span.prj-title:hover {
+          cursor: pointer;  
+        }
+      }
+      li.labels {
+        border-bottom: 1px solid var(--fg);
       }
     }
   }

@@ -11,7 +11,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
     .then(data => {
       const projects = data.docs;
       let count = 0;
-      // console.log(projects);
+      console.log(projects);
+      const projectsList = document.getElementById('projects');
+      for (let child of [...projectsList.childNodes]) {  // Use spread to avoid live NodeList issues
+        if (child.nodeType === Node.TEXT_NODE) {
+          projectsList.removeChild(child);
+        }
+      }
       for (let project of projects) {
         let title, blurb;
         let insights = [], specialities = [], tools = [], aesthetics = [];
@@ -45,7 +51,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
         // console.log(aesthetics);
 
         // CREATE AND INSERT HTML ELEMENTS HERE
-        const projectsList = document.getElementById('projects');
         addPrjIndexEl(projectsList, count, title, specialities, tools, aesthetics);
         count++;
       }
