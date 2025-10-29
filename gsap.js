@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", (e) => {
+    // gsap.registerPlugin(SplitText);
+    
     let forward = false;
     let targetY;
     let tweens = [];

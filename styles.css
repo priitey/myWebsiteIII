@@ -75,6 +75,10 @@
 * {
   box-sizing: border-box;
 }
+*::-moz-selection {
+  background-color: var(--alt);
+  color: var(--alt2);
+}
 *::selection {
   background-color: var(--alt);
   color: var(--alt2);
@@ -102,7 +106,6 @@ body {
   padding: 0;
   background: var(--bg);
   color: var(--fg);
-  /* font-family: "Times Newer Roman", normal, serif; */
   font-family: "Arial", thin, serif;
 }
 
@@ -114,6 +117,7 @@ a {
 .button {
   border: 1px none var(--fg);
   outline: none;
+  -webkit-animation: btnFg 0.2s ease-in-out;
   animation: btnFg 0.2s ease-in-out;
   background: var(--bg);
   cursor: pointer;
@@ -123,6 +127,7 @@ a {
   border-radius: 0.2rem;
 }
 .button:hover {
+  -webkit-animation: btnBg 0.2s ease-in-out;
   animation: btnBg 0.2s ease-in-out;
   background: var(--hl);
 }
@@ -136,6 +141,7 @@ a {
 :focus-visible {
   box-shadow: 0 0 0.8em var(--alt2);
   border-radius: 0.2rem;
+  -webkit-animation: focusIn 0.2s ease-in-out;
   animation: focusIn 0.2s ease-in-out;
 }
 
@@ -173,8 +179,9 @@ main {
       span#titles-copy {
         padding: 1.5rem 0.5rem 0 0;
         width: 250px;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         word-wrap: break-word;
+        line-height: 1.7rem;
       }
     }
     div#ctls-wrapper {
@@ -187,6 +194,51 @@ main {
         padding: 0;
         div.tag-container {
           padding: 1.5rem 0 0 0;
+          ul.tags-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            li {
+              position: relative;
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              label {
+                position: relative;
+                cursor: pointer;
+                input[type="checkbox"] {
+                  -webkit-appearance: none;
+                  -moz-appearance: none;
+                  appearance: none;
+                }
+                span.tag-txt {
+                  font-size: var(--body);
+                  border: 1px none var(--fg);
+                  box-shadow: 0.2rem 0.2rem 0.5rem var(--hl);
+                  border-radius: 0.2rem;
+                  transition: all 0.2s ease-in-out;
+                }
+                input[type="checkbox"] + span.tag-txt {
+                  display: inline-block;
+                  padding: 0.4rem;
+                }
+                :hover + span.tag-txt {
+                  color: var(--alt2);
+                  box-shadow: 0.2rem 0.2rem 0.5rem var(--alt2);
+                }
+                :checked + span.tag-txt {
+                  background: var(--hl);
+                  display: inline-block;
+                  color: var(--alt);
+                  border: 1px none var(--bg);
+                  box-shadow: 0.2rem 0.2rem 0.5rem var(--alt);
+                }
+                input[type="checkbox"][disabled] + span.tag-txt {
+                  background: grey;
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -197,12 +249,11 @@ main {
     padding: 1rem;
     border-radius: 0.2rem;
     font-family: "Arial", thin, sans-serif;
-    /* box-shadow: inherit; */
-    /* background-image: url(placeholder.png); */
-    /* filter: grayscale(100%); */
     min-width: 80%;
     ol#projects {
       margin: 0 0 0 0;
+      width: -webkit-max-content;
+      width: -moz-max-content;
       width: max-content;
       font-size: var(--body);
       li {
@@ -218,7 +269,7 @@ main {
           overflow: hidden;
         }
         span.prj-title:hover {
-          cursor: pointer;  
+          cursor: pointer;
         }
       }
       li.labels {
@@ -232,12 +283,29 @@ main {
   display: none !important;
 }
 
+@-webkit-keyframes btnBg {
+  0% {
+    background: var(--bg);
+  }
+  100% {
+    background: var(--hl);
+  }
+}
+
 @keyframes btnBg {
   0% {
     background: var(--bg);
   }
   100% {
     background: var(--hl);
+  }
+}
+@-webkit-keyframes btnFg {
+  0% {
+    background: var(--hl);
+  }
+  100% {
+    background: var(--bg);
   }
 }
 @keyframes btnFg {
@@ -249,12 +317,29 @@ main {
   }
 }
 
+@-webkit-keyframes focusIn {
+  0% {
+    box-shadow: 0 0 -0.1em var(--alt2);
+  }
+  100% {
+    box-shadow: 0 0 0.8em var(--alt2);
+  }
+}
+
 @keyframes focusIn {
   0% {
     box-shadow: 0 0 -0.1em var(--alt2);
   }
   100% {
     box-shadow: 0 0 0.8em var(--alt2);
+  }
+}
+@-webkit-keyframes focusOut {
+  0% {
+    box-shadow: 0 0 0.8em var(--alt2);
+  }
+  100% {
+    box-shadow: 0 0 -0.1em var(--alt2);
   }
 }
 @keyframes focusOut {

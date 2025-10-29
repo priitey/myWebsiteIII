@@ -11,7 +11,7 @@
       <menu id="menu-desktop" class="desktop">
         <div id="info-wrapper" class="">
           <section id="titles">
-            <span id="ack" class=""
+            <span id="ack"
               ><button
                 id="ack-button"
                 class="button"
@@ -35,7 +35,7 @@
                 Who?
               </button>
             </span>
-            <span id="explain" class=""
+            <span id="explain"
               ><button
                 id="explain-button"
                 class="button"
@@ -99,7 +99,15 @@
               class="tag-container hidden"
               data-tag="spec"
             >
-              Speciality tags loading...
+              <!-- Speciality tags loading... -->
+              <ul class="tags-list">
+                <li>
+                  <label for="tag_name">
+                    <input type="checkbox" id="tag_name" name="tag_name" />
+                    <span class="tag-txt">Tag</span>
+                  </label>
+                </li>
+              </ul>
             </div>
             <div id="tool-tags" class="tag-container hidden" data-tag="tool">
               Tool tags loading...

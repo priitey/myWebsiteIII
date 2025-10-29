@@ -99,3 +99,7 @@ function addPrjIndexEl(parentEl, index, title, specialities, tools, aesthetics) 
 
   parentEl.appendChild(newLi);
 }
+
+function addPrjTags(parentEl, index, specialities, tools, aesthetics) {
+  
+}
