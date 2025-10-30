@@ -73,11 +73,6 @@
               </button>
             </span>
           </section>
-          <!-- <span id="contact" class="">
-                <a id="email" href="mailto:hello@prw.studio">✉</a>
-                <a id="insta" href="https://www.instagram.com/3_d_12/">@</a>
-                <button id="friends">☺︎</button>
-          </span> -->
           <span id="titles-copy"><!-- Animated copy goes here injected by JS--></span>
         </div>
 
@@ -148,15 +143,61 @@
     </main>
 
     <section id="prj-info">
-      <h2>a title should be here...</h2>
-      <h4>a bunch of tags should be here...</h4>
-      <h4></h4>
+      <div id="static-items">
+        <button id="close" class="button">CLOSE</button>
+        <div id="txt-img">
+          <h2>Loading...</h2>
+          <h4>Loading...</h4>
+          <h4>Loading...</h4>
+          <!-- <div id="gallery"></div> -->
+        </div>
+        <div id="gallery"></div>
+      </div>
+      <!-- floating insights to be inserted dynamically here-->
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
 
     <script type="text/javascript" src="cms.js"></script>
     <script type="text/javascript" src="copyAnim.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const info = document.getElementById('prj-info');
+        const close = document.getElementById('close');
+        
+        // Create a drag handle
+        const dragHandle = document.createElement('div');
+        dragHandle.style.cssText = `
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 30px;
+          background: rgba(11, 11, 11, 0.02);
+          cursor: move;
+          z-index: 1;
+          margin-bottom: 0.2rem;
+        `;
+        
+        // Insert the drag handle at the beginning of prj-info
+        info.insertBefore(dragHandle, info.firstChild);
+        
+        // Only make the drag handle draggable, not the entire element
+        Draggable.create("#prj-info", {
+          type: "x,y",
+          bounds: "body",
+          handle: dragHandle // Only drag when this handle is used
+        });
+        
+        gsap.set("#prj-info", { xPercent: -50, yPercent: -50 });
+        
+        close.addEventListener("click", () => {
+          info.style.display = "none";
+        });
+      });
+    </script>
   </body>
 </html>
