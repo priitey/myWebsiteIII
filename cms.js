@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const allSpecialities = new Set();
       const allTools = new Set();
       const allAesthetics = new Set();
-      const selectedTags = new Set();
 
       for (let project of projects) {
         let title, blurb;
@@ -72,6 +71,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
           });
         }
 
+        project.specialities = specialities;
+        project.tools = tools;
+        project.aesthetics = aesthetics;
+
         // CREATE AND INSERT HTML ELEMENTS HERE
         addPrjIndexEl(projectsList, count, title, specialities, tools, aesthetics);
         count++;
@@ -82,6 +85,89 @@ document.addEventListener("DOMContentLoaded", (e) => {
       addPrjToolsTags(toolTagsEl, Array.from(allTools));
       addPrjAesthsTags(aesthsTagsEl, Array.from(allAesthetics));
 
+      // Store project data for sorting (including DOM elements)
+      const projectData = projects.map((project, index) => {
+        const element = document.getElementById('prj' + (index + 1));
+        const allTags = new Set([...(project.specialities || []), ...(project.tools || []), ...(project.aesthetics || [])]);
+        return { project, element, allTags };
+      });
+
+      // Set to track selected tags
+      const selectedTags = new Set();
+
+      // Function to calculate match count for a project
+      function getMatchCount(projectTags, selectedTags) {
+        return [...projectTags].filter(tag => selectedTags.has(tag)).length;
+      }
+
+      function sortAndReorderProjects() {
+        // Calculate match counts
+        projectData.forEach(data => {
+          data.matchCount = getMatchCount(data.allTags, selectedTags);
+        });
+
+        // Sort: first by match count (descending), then by title (ascending)
+        projectData.sort((a, b) => {
+          if (b.matchCount !== a.matchCount) {
+            return b.matchCount - a.matchCount; // Higher match count first
+          }
+          return a.project.title.localeCompare(b.project.title); // Alphabetical by title
+        });
+
+        // Reorder DOM elements with animation
+        const projectsList = document.getElementById('projects');
+        
+        // Record initial positions (First)
+        const initialPositions = projectData.map(data => {
+          const rect = data.element.getBoundingClientRect();
+          return { element: data.element, top: rect.top, left: rect.left };
+        });
+        
+        // Append in new sorted order (Last)
+        projectData.forEach(data => {
+          projectsList.appendChild(data.element);
+        });
+        // Invert and animate (Invert & Play)
+        projectData.forEach((data, index) => {
+          let animInit, animation;
+          animation && animation.revert();
+          const newRect = data.element.getBoundingClientRect();
+          const initial = initialPositions.find(pos => pos.element === data.element);
+          const deltaX = initial.left - newRect.left;
+          const deltaY = initial.top - newRect.top;
+        
+          // Set initial transform to invert position
+          animInit = gsap.set(data.element, { x: deltaX, y: deltaY });
+        
+          // Animate to new position
+          animation = gsap.to(data.element, {
+            x: 0,
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out"
+          });
+        });
+      }
+
+      // Add event listeners to all tag checkboxes
+      const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+      allCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+          // Derive tag name from the associated span's text content
+          const span = checkbox.parentElement.querySelector('.tag-txt');
+          const tagName = span ? span.textContent : '';
+
+          if (checkbox.checked) {
+            selectedTags.add(tagName);
+          } else {
+            selectedTags.delete(tagName);
+          }
+          sortAndReorderProjects(); // Resort on every change
+        });
+      });
+
+      // Initial sort (no tags selected, so alphabetical by title)
+      sortAndReorderProjects();
     })
     .catch(error => {
       console.error("Error fetching projects:", error);
@@ -158,7 +244,6 @@ function addPrjSpecTags(parentEl, specialities) {
   });
 
   parentEl.appendChild(newUl); // Append the UL to the parent
-  console.log("Speciality tags loaded");
 }
 function addPrjToolsTags(parentEl, tools) {
   if (!parentEl || !Array.isArray(tools)) return;
@@ -188,7 +273,6 @@ function addPrjToolsTags(parentEl, tools) {
   });
 
   parentEl.appendChild(newUl); // Append the UL to the parent
-  console.log("Speciality tags loaded");
 }
 function addPrjAesthsTags(parentEl, aesthetics) {
   if (!parentEl || !Array.isArray(aesthetics)) return;
@@ -218,5 +302,4 @@ function addPrjAesthsTags(parentEl, aesthetics) {
   });
 
   parentEl.appendChild(newUl); // Append the UL to the parent
-  console.log("Speciality tags loaded");
 }

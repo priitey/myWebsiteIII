@@ -167,6 +167,8 @@ main {
     border-radius: 0.2rem;
     box-shadow: inherit;
     overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     div#info-wrapper {
       display: flex;
       flex-direction: column;
@@ -174,7 +176,8 @@ main {
       section#titles {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        flex-wrap: wrap;
+        justify-content: flex-start;
         gap: 0.5rem;
       }
       span#titles-copy {
@@ -183,6 +186,7 @@ main {
         font-size: 1.1rem;
         word-wrap: break-word;
         line-height: 1.7rem;
+        height: 333px;
       }
     }
     div#ctls-wrapper {
@@ -249,6 +253,9 @@ main {
       }
     }
   }
+  menu#menu-desktop.desktop::-webkit-scrollbar {
+    display: none;
+  }
   section#prj-canvas {
     display: flex;
     margin: 0;
@@ -256,6 +263,9 @@ main {
     border-radius: 0.2rem;
     font-family: "Arial", thin, sans-serif;
     min-width: 80%;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     ol#projects {
       margin: 0 0 0 0;
       width: -webkit-max-content;
@@ -279,9 +289,14 @@ main {
         }
       }
       li.labels {
-        border-bottom: 1px solid var(--fg);
+        border-bottom: 1px none var(--fg);
+        border-radius: 0.2rem;
+        box-shadow: 0.2rem 0.2rem 0.5rem var(--hl);
       }
     }
+  }
+  section#prj-canvas::-webkit-scrollbar {
+    display: none;
   }
 }
 
