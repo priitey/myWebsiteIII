@@ -159,13 +159,14 @@ main {
   menu#menu-desktop.desktop {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 8rem;
     margin: 0;
     padding: 1rem;
     border-radius: 0.2rem;
     box-shadow: inherit;
+    overflow: auto;
     div#info-wrapper {
       display: flex;
       flex-direction: column;
@@ -198,11 +199,16 @@ main {
             list-style: none;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: row;
+            gap: 0.1rem;
+            flex-wrap: wrap;
             li {
               position: relative;
               display: flex;
               align-items: center;
               justify-content: flex-start;
+              margin-bottom: 0.1rem;
               label {
                 position: relative;
                 cursor: pointer;
