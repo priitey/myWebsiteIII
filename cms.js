@@ -15,9 +15,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
       // console.log(projects);
       const projectsList = document.getElementById('projects');
       const tagContainers = document.querySelectorAll('.tag-container');
+
       const specTagsEl = document.getElementById('specialty-tags');
       const toolTagsEl = document.getElementById('tool-tags');
       const aesthsTagsEl = document.getElementById('aesthetic-tags');
+
+      const prjTitleEl = document.getElementById('prj-title');
+      const prjTagsEl = document.getElementById('prj-tags');
+      const prjBlurbEl = document.getElementById('prj-blurb');
+      const prjGallery = document.getElementById('gallery');
+
 
       // remove text content
       tagContainers.forEach(container => {
@@ -92,10 +99,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
         return { project, element, allTags };
       });
 
-      // Set to track selected tags
       const selectedTags = new Set();
 
-      // Function to calculate match count for a project
       function getMatchCount(projectTags, selectedTags) {
         return [...projectTags].filter(tag => selectedTags.has(tag)).length;
       }
@@ -149,7 +154,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
         });
       }
 
-      // Add event listeners to all tag checkboxes
       const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
       allCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', () => {
@@ -168,6 +172,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
       // Initial sort (no tags selected, so alphabetical by title)
       sortAndReorderProjects();
+
+      // When a project title is clicked, embed it's relative info into the 
+      // child elements of the section#prj-info element
+      
     })
     .catch(error => {
       console.error("Error fetching projects:", error);
@@ -302,4 +310,8 @@ function addPrjAesthsTags(parentEl, aesthetics) {
   });
 
   parentEl.appendChild(newUl); // Append the UL to the parent
+}
+
+function updatePrjInfo(title, tags, blurb, gallery, insights) {
+
 }

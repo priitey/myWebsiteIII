@@ -146,9 +146,9 @@
       <div id="static-items">
         <button id="close" class="button">CLOSE</button>
         <div id="txt-img">
-          <h2>Loading...</h2>
-          <h4>Loading...</h4>
-          <h4>Loading...</h4>
+          <h2 id="prj-title">Loading...</h2>
+          <h4 id="prj-tags">Loading...</h4>
+          <h4 id="prj-blurb">Loading...</h4>
           <!-- <div id="gallery"></div> -->
         </div>
         <div id="gallery"></div>
@@ -176,7 +176,7 @@
           left: 0;
           right: 0;
           height: 30px;
-          background: rgba(11, 11, 11, 0.02);
+          background: rgba(11, 11, 11, 0.04);
           cursor: move;
           z-index: 1;
           margin-bottom: 0.2rem;
@@ -192,7 +192,7 @@
           handle: dragHandle // Only drag when this handle is used
         });
         
-        gsap.set("#prj-info", { xPercent: -50, yPercent: -50 });
+        // gsap.set("#prj-info", { xPercent: -50, yPercent: -50 });
         
         close.addEventListener("click", () => {
           info.style.display = "none";

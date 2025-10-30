@@ -139,7 +139,7 @@ a {
   outline: none;
 }
 :focus-visible {
-  box-shadow: 0 0 0.8em var(--alt2);
+  box-shadow: 0 0 0.8em var(--alt);
   border-radius: 0.2rem;
   -webkit-animation: focusIn 0.2s ease-in-out;
   animation: focusIn 0.2s ease-in-out;
@@ -310,17 +310,15 @@ main {
 section#prj-info {
   position: absolute;
   z-index: 10;
-  top: 50%;
-  left: 50%;
+  top: 15%;
+  left: 15%;
   border-radius: 0.2rem;
   background: var(--bg);
   box-shadow: 0.2rem 0.2rem 0.25rem var(--hl);
   margin: 0 0 0 0;
   padding: 2rem;
-  /* width: 80vw;
-  height: 80vh; */
-  width: 500px;
-  height: 500px;
+  width: 80vw;
+  height: 80vh;
   resize: both;
   overflow: auto;
   div#static-items {
@@ -328,6 +326,9 @@ section#prj-info {
     overflow: hidden;
     background: transparent;
     cursor: auto;
+    button#close {
+      margin-top: 1rem;
+    }
     div#txt-img {
       display: flex;
       flex-direction: row;
@@ -336,12 +337,6 @@ section#prj-info {
         padding-top: 2rem;
       }
     }
-  }
-  div#static-items h2,
-  div#static-items h4 {
-    user-select: text;
-    -webkit-user-select: text;
-    -moz-user-select: text;
   }
 }
 
