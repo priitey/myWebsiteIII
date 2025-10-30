@@ -223,15 +223,15 @@ main {
                   padding: 0.4rem;
                 }
                 :hover + span.tag-txt {
-                  color: var(--alt2);
-                  box-shadow: 0.2rem 0.2rem 0.5rem var(--alt2);
+                  color: var(--alt);
+                  box-shadow: 0.2rem 0.2rem 0.5rem var(--alt);
                 }
                 :checked + span.tag-txt {
-                  background: var(--hl);
+                  background: var(--bg);
                   display: inline-block;
-                  color: var(--alt);
+                  color: var(--alt2);
                   border: 1px none var(--bg);
-                  box-shadow: 0.2rem 0.2rem 0.5rem var(--alt);
+                  box-shadow: 0.2rem 0.2rem 0.5rem var(--alt2);
                 }
                 input[type="checkbox"][disabled] + span.tag-txt {
                   background: grey;
