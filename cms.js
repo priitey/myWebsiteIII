@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
     })
     .then(data => {
       const projects = data.docs;
-      const prjTags = projects.tags;
       let count = 0;
       // console.log(projects);
       const projectsList = document.getElementById('projects');
@@ -20,12 +19,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const toolTagsEl = document.getElementById('tool-tags');
       const aesthsTagsEl = document.getElementById('aesthetic-tags');
 
-      const prjTitleEl = document.getElementById('prj-title');
-      const prjTagsEl = document.getElementById('prj-tags');
-      const prjBlurbEl = document.getElementById('prj-blurb');
+      const prjTitleEl = document.getElementById('info-title');
+      const prjTagsEl = document.getElementById('info-tags');
+      const prjBlurbEl = document.getElementById('info-blurb');
       const prjGallery = document.getElementById('gallery');
-
-
       // remove text content
       tagContainers.forEach(container => {
         for (let child of [...container.childNodes]) {
@@ -34,7 +31,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
           }
         }
       });
-      for (let child of [...projectsList.childNodes]) {  // Use spread to avoid live NodeList issues
+      for (let child of [...projectsList.childNodes]) {
         if (child.nodeType === Node.TEXT_NODE) {
           projectsList.removeChild(child);
         }
@@ -47,7 +44,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
       for (let project of projects) {
         let title, blurb;
-        let insights = [], specialities = [], tools = [], aesthetics = [];
+        let insights = [], specialities = [], tools = [], aesthetics = [], visuals = [];
 
         // Extract title and blurb text
         title = project.title;
@@ -78,9 +75,19 @@ document.addEventListener("DOMContentLoaded", (e) => {
           });
         }
 
+        // Extract visuals
+        if (project.visual && Array.isArray(project.visual)) {
+          project.visual.forEach(vis => {
+            if (vis.visual) {
+              visuals.push(vis.visual); // Push the image object (with url, alt, etc.)
+            }
+          });
+        }
+
         project.specialities = specialities;
         project.tools = tools;
         project.aesthetics = aesthetics;
+        project.visuals = visuals;
 
         // CREATE AND INSERT HTML ELEMENTS HERE
         addPrjIndexEl(projectsList, count, title, specialities, tools, aesthetics);
@@ -121,13 +128,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
         // Reorder DOM elements with animation
         const projectsList = document.getElementById('projects');
-        
+
         // Record initial positions (First)
         const initialPositions = projectData.map(data => {
           const rect = data.element.getBoundingClientRect();
           return { element: data.element, top: rect.top, left: rect.left };
         });
-        
+
         // Append in new sorted order (Last)
         projectData.forEach(data => {
           projectsList.appendChild(data.element);
@@ -140,10 +147,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
           const initial = initialPositions.find(pos => pos.element === data.element);
           const deltaX = initial.left - newRect.left;
           const deltaY = initial.top - newRect.top;
-        
+
           // Set initial transform to invert position
           animInit = gsap.set(data.element, { x: deltaX, y: deltaY });
-        
+
           // Animate to new position
           animation = gsap.to(data.element, {
             x: 0,
@@ -173,9 +180,21 @@ document.addEventListener("DOMContentLoaded", (e) => {
       // Initial sort (no tags selected, so alphabetical by title)
       sortAndReorderProjects();
 
-      // When a project title is clicked, embed it's relative info into the 
-      // child elements of the section#prj-info element
-      
+      const indexElTitles = document.querySelectorAll('.prj-title');
+      indexElTitles.forEach(titleEl => {
+        titleEl.addEventListener('click', () => {
+          const li = titleEl.closest('li');
+          const project = projectData.find(data => data.element === li)?.project;
+          // console.log('Project title clicked:', titleEl.textContent);
+          if (project) {
+            prjTitleEl.textContent = project.title;
+            prjTagsEl.textContent = [...project.specialities, ...project.tools, ...project.aesthetics].join(', ');
+            prjBlurbEl.textContent = extractTextFromRichText(project.blurb);
+            updateGallery(prjGallery, project.visuals);
+            document.getElementById('prj-info').style.display = 'block';
+          }
+        });
+      });
     })
     .catch(error => {
       console.error("Error fetching projects:", error);
@@ -312,6 +331,21 @@ function addPrjAesthsTags(parentEl, aesthetics) {
   parentEl.appendChild(newUl); // Append the UL to the parent
 }
 
-function updatePrjInfo(title, tags, blurb, gallery, insights) {
-
+function updateGallery(el, gallery) {
+  el.textContent = '';
+  // console.log("Visuals loaded: ", gallery);
+  if (gallery && Array.isArray(gallery)) {
+    gallery.forEach(item => {
+      const img = document.createElement('img');
+      console.log(item);
+      img.src = "https://prw-studio-cms.vercel.app/" + item.url;
+      img.alt = item.alt || 'Project image';
+      img.style.maxWidth = '100%';
+      img.style.height = 'auto';
+      img.style.background = 'var(--alt)';
+      el.appendChild(img);
+    });
+  } else {
+    el.textContent = 'No gallery available';
+  }
 }

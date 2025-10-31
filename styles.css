@@ -308,6 +308,7 @@ main {
 }
 
 section#prj-info {
+  display: none;
   position: absolute;
   z-index: 10;
   top: 15%;
@@ -319,11 +320,12 @@ section#prj-info {
   padding: 2rem;
   width: 80vw;
   height: 80vh;
-  resize: both;
   overflow: auto;
+  resize: both;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   div#static-items {
     min-width: 200px;
-    overflow: hidden;
     background: transparent;
     cursor: auto;
     button#close {
@@ -333,8 +335,33 @@ section#prj-info {
       display: flex;
       flex-direction: row;
       gap: 1rem;
+      h2 {
+        width: 200px;
+      }
       h4 {
+        margin: 0;
         padding-top: 2rem;
+      }
+      h4#info-tags {
+        width: 200px;
+      }
+      h4#info-blurb {
+        width: 200px;
+        overflow: auto;
+        overscroll-behavior: auto;
+      }
+      div#gallery {
+        padding-top: 2rem;
+        overflow: auto;
+        overscroll-behavior: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10rem;
+        min-width: 200px;
+        max-width: 50%;
+        height: 600px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
       }
     }
   }

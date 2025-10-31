@@ -146,12 +146,12 @@
       <div id="static-items">
         <button id="close" class="button">CLOSE</button>
         <div id="txt-img">
-          <h2 id="prj-title">Loading...</h2>
-          <h4 id="prj-tags">Loading...</h4>
-          <h4 id="prj-blurb">Loading...</h4>
-          <!-- <div id="gallery"></div> -->
+          <h2 id="info-title">Loading...</h2>
+          <h4 id="info-tags">Loading...</h4>
+          <h4 id="info-blurb">Loading...</h4>
+          <div id="gallery">Gallery loading...</div>
         </div>
-        <div id="gallery"></div>
+        <!-- <div id="gallery"></div> -->
       </div>
       <!-- floating insights to be inserted dynamically here-->
     </section>
@@ -187,12 +187,10 @@
         
         // Only make the drag handle draggable, not the entire element
         Draggable.create("#prj-info", {
-          type: "x,y",
+          type: "x,y,width,height",
           bounds: "body",
           handle: dragHandle // Only drag when this handle is used
         });
-        
-        // gsap.set("#prj-info", { xPercent: -50, yPercent: -50 });
         
         close.addEventListener("click", () => {
           info.style.display = "none";
