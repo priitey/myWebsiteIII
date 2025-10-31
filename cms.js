@@ -336,14 +336,29 @@ function updateGallery(el, gallery) {
   // console.log("Visuals loaded: ", gallery);
   if (gallery && Array.isArray(gallery)) {
     gallery.forEach(item => {
-      const img = document.createElement('img');
-      console.log(item);
-      img.src = "https://prw-studio-cms.vercel.app/" + item.url;
-      img.alt = item.alt || 'Project image';
-      img.style.maxWidth = '100%';
-      img.style.height = 'auto';
-      img.style.background = 'var(--alt)';
-      el.appendChild(img);
+      let mediaElement;
+      if (item.mimeType && item.mimeType.startsWith('video/')) {
+        // Create video element for videos
+        mediaElement = document.createElement('video');
+        mediaElement.src = "https://prw-studio-cms.vercel.app/" + item.url;
+        mediaElement.controls = true; // Add controls for play/pause
+        mediaElement.preload = 'metadata'; // Load metadata for better UX
+        mediaElement.style.maxWidth = '100%';
+        mediaElement.style.height = 'auto';
+        mediaElement.style.maxHeight = '55%';
+        mediaElement.style.background = 'var(--bg)';
+      } else {
+        // Create img element for images
+        mediaElement = document.createElement('img');
+        mediaElement.src = "https://prw-studio-cms.vercel.app/" + item.url;
+        mediaElement.alt = item.alt || 'Project image';
+        mediaElement.style.maxWidth = '100%';
+        mediaElement.style.height = 'auto';
+        mediaElement.style.maxHeight = '55%';
+        mediaElement.style.objectFit = 'cover';
+        mediaElement.style.background = 'var(--alt)';
+      }
+      el.appendChild(mediaElement);
     });
   } else {
     el.textContent = 'No gallery available';
