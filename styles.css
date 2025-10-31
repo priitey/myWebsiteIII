@@ -298,7 +298,7 @@ main {
       li.labels {
         border-bottom: 1px none var(--fg);
         border-radius: 0.2rem;
-        box-shadow: 0.2rem 0.2rem 0.5rem var(--hl);
+        /* box-shadow: 0.2rem 0.2rem 0.5rem var(--hl); */
       }
     }
   }
