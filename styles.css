@@ -366,6 +366,9 @@ section#prj-info {
     }
   }
 }
+section#prj-info::-webkit-scrollbar {
+  display: none;
+}
 
 .hidden {
   display: none !important;

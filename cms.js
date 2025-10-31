@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
         // Extract title and blurb text
         title = project.title;
-        blurb = extractTextFromRichText(project.blurb);
+        blurb = extractRichTextAsHTML(project.blurb);
 
         // Extract insights texts
         if (project.insight && Array.isArray(project.insight)) {
@@ -189,7 +189,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
           if (project) {
             prjTitleEl.textContent = project.title;
             prjTagsEl.textContent = [...project.specialities, ...project.tools, ...project.aesthetics].join(', ');
-            prjBlurbEl.textContent = extractTextFromRichText(project.blurb);
+            prjBlurbEl.innerHTML = extractRichTextAsHTML(project.blurb);
+            console.log('Blurb object:', project.blurb);
+            console.log('Extracted HTML:', extractRichTextAsHTML(project.blurb));
             updateGallery(prjGallery, project.visuals);
             document.getElementById('prj-info').style.display = 'block';
           }
@@ -201,13 +203,24 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
 });
 
-function extractTextFromRichText(richText) {
+function extractRichTextAsHTML(richText) {
   if (!richText?.root?.children) return '';
-  return richText.root.children.flatMap(child =>
-    child.children?.map(c => c.text).join('') || ''
-  ).join('\n');
-  // Below is the "hard-coded" way to extract blurb text
-  // console.log(projects[2].blurb.root.children[0].children[0].text);
+  return richText.root.children.flatMap(paragraph => {
+    if (paragraph.children) {
+      return paragraph.children.map(child => {
+        if (child.type === 'autolink' && child.fields?.url) {
+          // Handle autolinks: extract URL and text from children
+          const linkText = child.children?.[0]?.text || child.fields.url;
+          return `<a href="${child.fields.url}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+        } else if (child.type === 'text' && child.text) {
+          // Handle plain text
+          return child.text;
+        }
+        return '';
+      }).join('');
+    }
+    return '';
+  }).join('\n');
 }
 
 function addPrjIndexEl(parentEl, index, title, specialities, tools, aesthetics) {
