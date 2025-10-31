@@ -346,7 +346,9 @@ section#prj-info {
         width: 200px;
       }
       h4#info-blurb {
-        width: 200px;
+        width: 250px;
+        font-size: 1.1rem;
+        line-height: 1.7rem;
         overflow: auto;
         overscroll-behavior: auto;
       }
@@ -358,16 +360,44 @@ section#prj-info {
         flex-direction: column;
         gap: 10rem;
         min-width: 200px;
-        max-width: 50%;
+        max-width: 100%;
         height: 600px;
         -ms-overflow-style: none;
         scrollbar-width: none;
+      }
+      div#gallery::-webkit-scrollbar {
+        display: none;
       }
     }
   }
 }
 section#prj-info::-webkit-scrollbar {
   display: none;
+}
+
+div#floaty-img-wrapper {
+  display: none;
+  position: absolute;
+  z-index: 11;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  backdrop-filter: blur(10px);
+  padding: 4rem;
+  cursor: pointer;
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    object-fit: contain;
+    cursor: auto;
+  }
 }
 
 .hidden {

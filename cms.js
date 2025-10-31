@@ -181,6 +181,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
       sortAndReorderProjects();
 
       const indexElTitles = document.querySelectorAll('.prj-title');
+      const fullImgCtr = document.getElementById('floaty-img-wrapper');
+      const fullImg = document.getElementById('floaty-img');
       indexElTitles.forEach(titleEl => {
         titleEl.addEventListener('click', () => {
           const li = titleEl.closest('li');
@@ -190,12 +192,25 @@ document.addEventListener("DOMContentLoaded", (e) => {
             prjTitleEl.textContent = project.title;
             prjTagsEl.textContent = [...project.specialities, ...project.tools, ...project.aesthetics].join(', ');
             prjBlurbEl.innerHTML = extractRichTextAsHTML(project.blurb);
-            console.log('Blurb object:', project.blurb);
-            console.log('Extracted HTML:', extractRichTextAsHTML(project.blurb));
+            // console.log('Blurb object:', project.blurb);
+            // console.log('Extracted HTML:', extractRichTextAsHTML(project.blurb));
             updateGallery(prjGallery, project.visuals);
             document.getElementById('prj-info').style.display = 'block';
+
+            // Add event listeners to the newly added gallery images
+            const prjImgs = prjGallery.querySelectorAll('.a-prj-visual');
+            prjImgs.forEach(prjImg => {
+              prjImg.addEventListener("click", () => {
+                console.log("img clicked");
+                fullImg.src = prjImg.src;  // Set the image source
+                fullImgCtr.style.display = "block";
+              });
+            });
           }
         });
+      });
+      fullImgCtr.addEventListener("click", () => {
+        fullImgCtr.style.display = "none";
       });
     })
     .catch(error => {
@@ -346,7 +361,6 @@ function addPrjAesthsTags(parentEl, aesthetics) {
 
 function updateGallery(el, gallery) {
   el.textContent = '';
-  // console.log("Visuals loaded: ", gallery);
   if (gallery && Array.isArray(gallery)) {
     gallery.forEach(item => {
       let mediaElement;
@@ -360,6 +374,7 @@ function updateGallery(el, gallery) {
         mediaElement.style.height = 'auto';
         mediaElement.style.maxHeight = '55%';
         mediaElement.style.background = 'var(--bg)';
+        mediaElement.classList.add("a-prj-visual");
       } else {
         // Create img element for images
         mediaElement = document.createElement('img');
@@ -370,6 +385,8 @@ function updateGallery(el, gallery) {
         mediaElement.style.maxHeight = '55%';
         mediaElement.style.objectFit = 'cover';
         mediaElement.style.background = 'var(--alt)';
+        mediaElement.style.cursor = 'pointer';
+        mediaElement.classList.add("a-prj-visual");
       }
       el.appendChild(mediaElement);
     });
