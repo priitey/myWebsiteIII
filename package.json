@@ -1,0 +1,13 @@
+{
+  "name": "prw-studio-website",
+  "version": "1.0.0",
+  "description": "Portfolio website with SASS compilation",
+  "scripts": {
+    "sass:build": "sass styles.scss styles.css",
+    "sass:watch": "sass --watch styles.scss:styles.css",
+    "sass:build:prod": "sass styles.scss styles.css --style=compressed"
+  },
+  "devDependencies": {
+    "sass": "^1.70.0"
+  }
+}

@@ -151,7 +151,6 @@
           <h4 id="info-blurb">Loading...</h4>
           <div id="gallery">Gallery loading...</div>
         </div>
-        <!-- <div id="gallery"></div> -->
       </div>
       <!-- floating insights to be inserted dynamically here-->
     </section>
@@ -193,7 +192,7 @@
         Draggable.create("#prj-info", {
           type: "x,y",
           bounds: "body",
-          handle: dragHandle // Only drag when this handle is used
+          handle: dragHandle
         });
         
         close.addEventListener("click", () => {

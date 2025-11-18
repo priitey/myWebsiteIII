@@ -1,0 +1,5 @@
+node_modules/
+package-lock.json
+# Optionally ignore compiled CSS if you want to compile on deployment
+# styles.css
+# styles.css.map
