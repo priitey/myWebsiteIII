@@ -368,8 +368,9 @@ function updateGallery(el, gallery) {
         // Create video element for videos
         mediaElement = document.createElement('video');
         mediaElement.src = "https://prw-studio-cms.vercel.app/" + item.url;
-        mediaElement.controls = true; // Add controls for play/pause
-        mediaElement.preload = 'metadata'; // Load metadata for better UX
+        mediaElement.controls = true;
+        mediaElement.preload = 'metadata';
+        mediaElement.width = '100%';
         mediaElement.style.maxWidth = '100%';
         mediaElement.style.height = 'auto';
         mediaElement.style.maxHeight = '55%';

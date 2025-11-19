@@ -158,16 +158,26 @@ main menu#menu-desktop.desktop {
   scrollbar-width: none;
 }
 main menu#menu-desktop.desktop div#info-wrapper {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 main menu#menu-desktop.desktop div#info-wrapper section#titles {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-direction: row;
   justify-content: flex-start;
   gap: 0.5rem;
+  width: 100%;
+}
+main menu#menu-desktop.desktop div#info-wrapper section#titles span {
+  width: max-content;
+  flex-shrink: 1;
+}
+main menu#menu-desktop.desktop div#info-wrapper section#titles span#friends {
+  margin-top: 0.5rem;
 }
 main menu#menu-desktop.desktop div#info-wrapper span#titles-copy {
   padding: 1.5rem 0.5rem 0 0;
@@ -322,6 +332,8 @@ section#prj-info div#static-items div#txt-img {
 }
 section#prj-info div#static-items div#txt-img h2 {
   width: 200px;
+  margin: 0;
+  padding-top: 2rem;
 }
 section#prj-info div#static-items div#txt-img h4 {
   margin: 0;
@@ -335,11 +347,13 @@ section#prj-info div#static-items div#txt-img h4#info-blurb {
   font-size: 1.1rem;
   line-height: 1.7rem;
   overflow: auto;
+  -ms-scroll-chaining: chained;
   overscroll-behavior: auto;
 }
 section#prj-info div#static-items div#txt-img div#gallery {
   padding-top: 2rem;
   overflow: auto;
+  -ms-scroll-chaining: chained;
   overscroll-behavior: auto;
   display: flex;
   flex-direction: column;
@@ -353,6 +367,9 @@ section#prj-info div#static-items div#txt-img div#gallery {
 section#prj-info div#static-items div#txt-img div#gallery::-webkit-scrollbar {
   display: none;
 }
+section#prj-info div#static-items div#txt-img:last-child {
+  flex: 4;
+}
 
 section#prj-info::-webkit-scrollbar {
   display: none;
@@ -361,13 +378,14 @@ section#prj-info::-webkit-scrollbar {
 div#floaty-img-wrapper {
   display: none;
   position: absolute;
-  z-index: 11;
+  z-index: 111;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: transparent;
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   padding: 4rem;
   cursor: pointer;
 }
@@ -379,6 +397,7 @@ div#floaty-img-wrapper img {
   left: 50%;
   transform: translate(-50%, -50%);
   background: transparent;
+  -o-object-fit: contain;
   object-fit: contain;
   cursor: auto;
 }
