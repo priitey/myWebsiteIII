@@ -350,6 +350,7 @@ section#prj-info {
       display: flex;
       flex-direction: row;
       gap: 1rem;
+      width: 100%;
       h2 {
         width: 200px;
         margin: 0;
@@ -383,13 +384,11 @@ section#prj-info {
         height: 600px;
         -ms-overflow-style: none;
         scrollbar-width: none;
+        flex: 1;
       }
       div#gallery::-webkit-scrollbar {
         display: none;
       }
-    }
-    div#txt-img:last-child {
-      flex: 4;
     }
   }
 }
