@@ -364,10 +364,11 @@ function updateGallery(el, gallery) {
   if (gallery && Array.isArray(gallery)) {
     gallery.forEach(item => {
       let mediaElement;
+      // console.log(item.mimeType);
       if (item.mimeType && item.mimeType.startsWith('video/')) {
         // Create video element for videos
         mediaElement = document.createElement('video');
-        mediaElement.src = "https://prw-studio-cms.vercel.app/" + item.url;
+        mediaElement.src = "https://prw-studio-cms.vercel.app" + item.url;
         mediaElement.controls = true;
         mediaElement.preload = 'metadata';
         mediaElement.width = '100%';
